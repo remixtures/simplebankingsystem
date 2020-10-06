@@ -37,7 +37,7 @@ public class SimpleBank {
     }
 
     protected void createCard() {
-        String cardNumber = "0";
+        String cardNumber;
         do {
             long restOfTheNumber = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
             cardNumber = IIN + restOfTheNumber;
@@ -55,18 +55,19 @@ public class SimpleBank {
 
     protected boolean validateCardNumber(String accountNumber) {
         long sum = 0;
-        for (int i = 0; i < accountNumber.length(); i++){
+        for (int i = 0; i < accountNumber.length(); i++) {
             char tmp = accountNumber.charAt(i);
             long digit = tmp - '0';
             long product;
-            if (i % 2 != 0){
-                product = digit * 1;
+            if (i % 2 != 0) {
+                product = digit;
             }
             else{
                 product = digit * 2;
             }
-            if (product > 9)
+            if (product > 9) {
                 product -= 9;
+            }
             sum += product;
         }
         return (sum % 10 == 0);
